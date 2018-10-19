@@ -238,7 +238,11 @@ def execute_go(direction):
     (and prints the name of the room into which the player is
     moving). Otherwise, it prints "You cannot go there."
     """
-    pass
+    global current_room
+    if is_valid_exit(current_room["exits"], direction) is True:
+        current_room = (move(current_room["exits"], direction))
+    else:
+        print("You cannot go there.")
 
 
 def execute_take(item_id):
@@ -247,15 +251,24 @@ def execute_take(item_id):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
-    pass
-    
+    for i in current_room["items"]:
+        if i["id"] == item_id:
+            inventory.append(i)
+            current_room["items"].remove(i)
+            return
+            print("You cannot take that")    
 
 def execute_drop(item_id):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    pass
+    for i in inventory:
+        if i["id"] == item_id:
+            inventory.remove(i)
+            current_room["items"].append(i)
+            return
+    print("You cannot drop that.")
     
 
 def execute_command(command):
@@ -343,8 +356,13 @@ def main():
 
         # Execute the player's command
         execute_command(command)
+        """win_check()
 
-
+def win_check():
+    if len(inv_items) > 5:
+        print("You win!")        
+    else:
+        pass"""
 
 # Are we being run as a script? If so, run main().
 # '__main__' is the name of the scope in which top-level code executes.
