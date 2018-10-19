@@ -202,11 +202,11 @@ def print_menu(exits, room_items, inv_items):
     #
     # COMPLETE ME!
     #
-    for items in room_items:
-        print("TAKE " + room_items["items"])
+    for item_x in room_items:
+        print("TAKE " + item_x["id"] + " to take " + item_x["name"] + ".")
 
-    for items in inv_items:
-        print("DROP " + inv_items["items"])
+    for item_y in inv_items:
+        print("DROP " + item_y["id"] + " to drop " + item_y["name"] + ".")  
         
         
     
